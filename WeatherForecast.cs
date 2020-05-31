@@ -1,6 +1,6 @@
 using System;
 
-namespace JitPermissionSQL  
+namespace JitPermissionSQL
 {
     public class WeatherForecast
     {
