@@ -1,0 +1,35 @@
+<div class="card">
+
+  <div class="card-header">
+    SQL Server Just in Time Permission
+  </div>
+
+  <div class="card-body">
+    Set connection string to SQL Server
+    <p></p>
+    <form (ngSubmit)="sqlConnect()"
+          [formGroup]="connectionForm">
+
+      <div class="form-group">
+        <label for="ServerName">ServerName</label>
+        <input type="text" class="form-control"
+               formControlName="dataSource">
+      </div>
+      <div class="form-group">
+        <label for="UserID">UserID</label>
+        <input type="text" class="form-control"
+               formControlName="userID">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control"
+               formControlName="password">
+      </div>
+      <button type="submit" class="btn btn-primary">Connect</button>
+    </form>
+  </div>
+</div>
+
+<br>Dirty: {{ connectionForm.dirty }}
+<br>Touched: {{ connectionForm.touched }}
+<br>Value: {{ connectionForm.value | json }}
