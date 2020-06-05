@@ -1,0 +1,77 @@
+<div class="card-header">
+  SQL Server Just in Time Permission
+</div>
+Select one role and one login to give temporary permission
+<p></p> 
+<div class='table-responsive'>
+  <table class='table table-striped w-auto'>
+    <thead>
+      <tr >
+        <th>#</th>
+        <th>RoleName</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of sqlperm.roles">
+        <td>
+        Checkbox
+        </td>
+        <td>
+          {{role}} 
+        </td>  
+    </tr>
+    </tbody>
+</table>
+</div>
+
+<br>
+<br>
+
+
+<div class='table-responsive'>
+  <table class='table table-striped w-auto'>
+    <thead>
+      <tr >
+        <th>#</th>
+        <th>LoginName</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let login of sqlperm.logins">
+        <td>
+        Checkbox
+        </td>
+        <td>
+          {{login}} 
+        </td>  
+    </tr>
+    </tbody>
+</table>
+</div>
+
+<br>
+<br>
+
+<mat-form-field>
+  <mat-label>Choose a date</mat-label>
+  <input matInput [matDatepicker]="picker">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+
+
+<form (ngSubmit)="submitJIT()" [formGroup]="permform">
+        <div class="form-group">
+        <label for="startDate">StartDate</label>
+        <input type="text" class="form-control"
+        formControlName="startDate">
+        </div>
+
+</form>
+
+
+<br>Dirty: {{ permform.dirty }}
+<br>Touched: {{ permform.touched }}
+<br>Value: {{ permform.value | json }}
+

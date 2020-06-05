@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionString } from './sql-conn';
 import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
+import {Routes, Router} from '@angular/router'
+import { ServerPermission } from '../sql-serverperm/sql-serverperm';
+
 
 @Component({
 
@@ -11,12 +14,13 @@ import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 
 
 
-
 export class SqlConnComponent implements OnInit {
+
   connectionForm: FormGroup;
   sqlConnString = new ConnectionString();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
     this.connectionForm = this.fb.group({
@@ -28,7 +32,7 @@ export class SqlConnComponent implements OnInit {
 
   sqlConnect(): void {
     console.log(this.connectionForm.value + " " + JSON.stringify(this.connectionForm.value));
-
+    this.router.navigate(['/sql-serverperm']);
   }
 
 

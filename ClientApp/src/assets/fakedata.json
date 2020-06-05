@@ -1,0 +1,13 @@
+{ 
+      "roles":[
+           "sysadmin" ,
+           "db_creator"
+            ], 
+      "logins": [
+          "sa" ,
+          "pippo"
+            ]
+      
+}
+     
+ 
