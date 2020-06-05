@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerPermission, ReceivedPermission } from './sql-serverperm';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { FormGroup, FormBuilder ,FormsModule } from '@angular/forms';
+import {NgbdDatepickerRange} from "./datepick.component"
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 
 
-
-
+ 
 @Component({
       selector: "sql-serverperm",
       templateUrl: "./sql-serverperm.component.html"
@@ -17,9 +17,12 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 export class SqlServerPermission implements OnInit {
 
+      fdate: Date;
+      tdate: Date;
       permform: FormGroup;
       sqlperm : ReceivedPermission;
-      sPerm = new ServerPermission();
+      role: string;
+      serverPerm = new ServerPermission();
       fetchurl : string=  "http://localhost:4200/assets/fakedata.json";
       
       constructor(private http: HttpClient, private fb :FormBuilder) { }
@@ -36,9 +39,22 @@ export class SqlServerPermission implements OnInit {
                   login: "",
                   role : "",
                   startDate: "",
-                  endDate : "" 
+                  endDate : ""
             })
             }
+
+      dateselectionto(seldates : any) : void{
+            this.tdate=seldates;}
+
+      dateselectionfrom(seldates : any) : void{
+            this.fdate=seldates;}
+
+      patchData(): void {
+            this.permform.patchValue({
+                  startDate : this.fdate,
+                  endDate : this.tdate,
+            })
+       }
 
 
 }
