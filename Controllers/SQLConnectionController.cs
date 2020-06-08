@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace JitPermissionSQL.Controllers
 {
@@ -20,25 +21,19 @@ namespace JitPermissionSQL.Controllers
             public ActionResult Post(CustomSQLConnectionString connstring )
             {
 
-           
-            using (SqlConnection conn = new SqlConnection(connstring.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connstring.ConnectionString))
             {
                 conn.Open();
 
             }
-            var payload = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(connstring.ConnectionString));
-            Response.Headers.Add("X - ConnOpen", payload);
-            return StatusCode(201);
+
+            ConnToken connToken = new ConnToken();
+            connToken.Token = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(connstring.ConnectionString)); ;
+            string json = JsonConvert.SerializeObject(connToken, Formatting.Indented);
+            return StatusCode(201 , json);
             
         }
         
-
-
-
-
-
-
-
 
     }
 }

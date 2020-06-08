@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ConnectionString } from './sql-conn';
+import { ConnectionString, SQLToken } from './sql-conn';
 import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import {Routes, Router} from '@angular/router'
 import { HttpClient } from '@angular/common/http';
@@ -18,10 +18,14 @@ export class SqlConnComponent implements OnInit {
   @Inject('BASE_URL') baseUrl: string
   connectionForm: FormGroup;
   sqlConnString = new ConnectionString();
+  tok: SQLToken;
+  
+
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject('BASE_URL') baseUrl: string
    ) { }
 
   ngOnInit() {
@@ -32,17 +36,20 @@ export class SqlConnComponent implements OnInit {
     })
   }
 
-
   sqlConnect(): void {
-    this.http.post<void>("https://localhost:44359/SQLConnection", this.connectionForm.value ).subscribe(result => {
-            
-            }, error => console.error(error));
-    
-    //console.log(JSON.stringify(this.sqlConnString) +  "class");
-    //console.log(this.connectionForm.value + " conn form  " + this.connectionForm.value);
-    //this.sqlConnString.userdID = this.connectionForm.get("userID").value;
-    this.router.navigate(['/sql-serverperm']);
+    this.http.post<SQLToken>("https://localhost:44359/SQLConnection", this.connectionForm.value)
+      .subscribe((token) =>
+      {
+        this.tok = token;
+        sessionStorage.setItem('conn', JSON.stringify(this.tok));
+        console.log(sessionStorage.getItem('conn'));
+      } ,
+       error => console.error(error)
+      );
 
+
+    this.router.navigate(['/sql-serverperm']);
+    
   }
 
 

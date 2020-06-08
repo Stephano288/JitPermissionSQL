@@ -24,12 +24,11 @@ export class SqlServerPermission implements OnInit {
       role: string;
       serverPerm = new ServerPermission();
       fetchurl : string=  "http://localhost:4200/assets/fakedata.json";
-      
       constructor(private http: HttpClient, private fb :FormBuilder) { }
-
-
+       
+   
   
-      ngOnInit() { 
+  ngOnInit() {
             this.http.get<ReceivedPermission>(this.fetchurl).subscribe(result => {
             this.sqlperm = result;
             }, error => console.error(error));

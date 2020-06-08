@@ -8,3 +8,7 @@ export class ConnectionString {
     public isIntegrated: boolean = false
   ) { }
 }
+
+export interface SQLToken {
+   sqlToken : string;
+}

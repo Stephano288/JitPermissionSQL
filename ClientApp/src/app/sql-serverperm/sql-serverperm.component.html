@@ -21,7 +21,7 @@ Select one role and one login to give temporary permission
           </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let login of sqlperm.logins">
+        <tr *ngFor="let login of sqlperm?.logins">
           <td>
             <input type="radio" name="login" value= {{login}}  formControlName="login">
           </td>
@@ -42,7 +42,7 @@ Select one role and one login to give temporary permission
           </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let role of sqlperm.roles">
+        <tr *ngFor="let role of sqlperm?.roles">
           <td>
             <input type="radio" name="role" value= {{role}}  formControlName="role">
           </td>
