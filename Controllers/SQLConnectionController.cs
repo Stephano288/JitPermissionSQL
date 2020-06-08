@@ -28,7 +28,7 @@ namespace JitPermissionSQL.Controllers
             }
 
             ConnToken connToken = new ConnToken();
-            connToken.Token = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(connstring.ConnectionString)); ;
+            connToken.sqltoken = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(connstring.ConnectionString)); ;
             string json = JsonConvert.SerializeObject(connToken, Formatting.Indented);
             return StatusCode(201 , json);
             

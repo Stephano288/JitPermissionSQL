@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerPermission, ReceivedPermission } from './sql-serverperm';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder ,FormsModule } from '@angular/forms';
 import {NgbdDatepickerRange} from "./datepick.component"
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
@@ -23,15 +23,18 @@ export class SqlServerPermission implements OnInit {
       sqlperm : ReceivedPermission;
       role: string;
       serverPerm = new ServerPermission();
-      fetchurl: string = "http://localhost:4200/assets/fakedata.json";
+      fetchurl: string = "https://localhost:44359/SQLPermission";
       token = sessionStorage.getItem('conn');
 
+
+
+  headers = new HttpHeaders({ 'X-Conn': this.token });
       constructor(private http: HttpClient, private fb :FormBuilder) { }
        
    
   
   ngOnInit() {
-            this.http.get<ReceivedPermission>(this.fetchurl).subscribe(result => {
+            this.http.get<ReceivedPermission>(this.fetchurl , {headers: this.headers} ).subscribe(result => {
             this.sqlperm = result;
             }, error => console.error(error));
 
@@ -59,17 +62,3 @@ export class SqlServerPermission implements OnInit {
 
 
 }
-
-
-
-// { 
-//       "roles":[
-//            "sysadmin" ,
-//            "db_creator"
-//             ], 
-//       "logins": [
-//           "sa" ,
-//           "pippo"
-//             ]
-      
-// }

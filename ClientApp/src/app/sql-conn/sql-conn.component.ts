@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 
 
 export class SqlConnComponent implements OnInit {
-  @Inject('BASE_URL') baseUrl: string
+
   connectionForm: FormGroup;
   sqlConnString = new ConnectionString();
   tok: SQLToken;
@@ -24,8 +24,7 @@ export class SqlConnComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient,
-    @Inject('BASE_URL') baseUrl: string
+    private http: HttpClient
    ) { }
 
   ngOnInit() {
@@ -41,7 +40,7 @@ export class SqlConnComponent implements OnInit {
       .subscribe((token) =>
       {
         this.tok = token;
-        sessionStorage.setItem('conn', JSON.stringify(this.tok));
+        sessionStorage.setItem('conn', this.tok.sqltoken);
         //console.log(sessionStorage.getItem('conn'));
       } ,
        error => console.error(error)

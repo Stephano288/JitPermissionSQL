@@ -25,7 +25,7 @@ namespace SQLJITApi
 
     public class ConnToken
     {
-        public string Token {get; set;}
+        public string sqltoken {get; set;}
     }
 
  
