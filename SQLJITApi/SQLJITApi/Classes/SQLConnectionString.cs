@@ -9,7 +9,7 @@ namespace SQLJITApi
         public string Password { get; set; }
         public string UserID { get; set; }
         public string ConnectionString
-        {
+        { set { }
             get
             {
                 SqlConnectionStringBuilder scb = new SqlConnectionStringBuilder();

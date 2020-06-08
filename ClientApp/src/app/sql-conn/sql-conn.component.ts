@@ -42,7 +42,7 @@ export class SqlConnComponent implements OnInit {
       {
         this.tok = token;
         sessionStorage.setItem('conn', JSON.stringify(this.tok));
-        console.log(sessionStorage.getItem('conn'));
+        //console.log(sessionStorage.getItem('conn'));
       } ,
        error => console.error(error)
       );

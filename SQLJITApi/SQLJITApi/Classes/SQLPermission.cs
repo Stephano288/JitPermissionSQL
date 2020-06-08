@@ -9,15 +9,8 @@ namespace SQLJITApi.Classes
 {
     public class SQLPermission
     {
-
-        public string Role { get; set; }
-        public string Login { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-
-
-
-
+        public List<string> logins { get; set;  }
+        public List<string> roles{ get; set; }
 
     }
 }

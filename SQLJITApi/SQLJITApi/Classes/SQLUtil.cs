@@ -6,12 +6,17 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
+using System.Text.Json;
+using System.Runtime.InteropServices;
+using System.Data;
 
 namespace SQLJITApi
 {
-    public  static class SQLUtil
+    public static class SQLUtil
     {
-       public static string JsonScriptExecutor (string FilePath , List<SqlParameter> parameters , string connString )
+    
+
+       public static DataTable ScriptExecutor (string FilePath,  string connString , List<SqlParameter> parameters = default)
         {
 
 
@@ -29,10 +34,13 @@ namespace SQLJITApi
             
                 using (SqlCommand cmd = new SqlCommand(script, conn))
                 {
-                    foreach (SqlParameter param in parameters)
-                    {
-                        cmd.Parameters.AddWithValue(param.ParameterName, param.Value);
+                    if (parameters!=null)
+                        {
+                        foreach (SqlParameter param in parameters)
+                        {
+                            cmd.Parameters.AddWithValue(param.ParameterName, param.Value);
 
+                        }
                     }
 
                     using (SqlDataAdapter ada = new SqlDataAdapter(cmd))
@@ -42,8 +50,11 @@ namespace SQLJITApi
                     }
                 }
             }
-            string json = JsonConvert.SerializeObject(dt, Formatting.Indented);
-            return json ;
+
+
+
+            return dt;
+
         }
         
     }

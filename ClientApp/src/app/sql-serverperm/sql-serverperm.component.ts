@@ -23,7 +23,9 @@ export class SqlServerPermission implements OnInit {
       sqlperm : ReceivedPermission;
       role: string;
       serverPerm = new ServerPermission();
-      fetchurl : string=  "http://localhost:4200/assets/fakedata.json";
+      fetchurl: string = "http://localhost:4200/assets/fakedata.json";
+      token = sessionStorage.getItem('conn');
+
       constructor(private http: HttpClient, private fb :FormBuilder) { }
        
    
@@ -57,3 +59,17 @@ export class SqlServerPermission implements OnInit {
 
 
 }
+
+
+
+// { 
+//       "roles":[
+//            "sysadmin" ,
+//            "db_creator"
+//             ], 
+//       "logins": [
+//           "sa" ,
+//           "pippo"
+//             ]
+      
+// }

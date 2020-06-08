@@ -1,13 +1,17 @@
-{ 
-      "roles":[
-           "sysadmin" ,
-           "db_creator"
-            ], 
+{
       "logins": [
-          "sa" ,
-          "pippo"
-            ]
-      
-}
-     
- 
+        "sa",
+        "EUROPE\\staltam",
+        "pippo"
+      ],
+      "roles": [
+        "sysadmin",
+        "securityadmin",
+        "serveradmin",
+        "setupadmin",
+        "processadmin",
+        "diskadmin",
+        "dbcreator",
+        "bulkadmin"
+      ]
+ }
