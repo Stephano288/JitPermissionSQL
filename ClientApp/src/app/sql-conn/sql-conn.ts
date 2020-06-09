@@ -10,5 +10,5 @@ export class ConnectionString {
 }
 
 export interface SQLToken {
-   sqltoken : string;
+   sqlToken : string;
 }

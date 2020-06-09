@@ -15,4 +15,5 @@ export interface ReceivedPermission
             roles : string[],
             logins : string[]
 }
- 
+
+

@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Data;
 using SQLJITApi.Classes;
+using Newtonsoft.Json.Serialization;
 
 namespace JitPermissionSQL.Controllers
 {
@@ -20,27 +21,33 @@ namespace JitPermissionSQL.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            Request.Headers.TryGetValue("X-Conn", out var traceValue);
 
-            var connString = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(traceValue));
+            string connString;
+
+            try 
+            { 
+                Request.Headers.TryGetValue("X-Conn", out var traceValue);
+                connString = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(traceValue));
+            }
+            catch
+            {
+                return StatusCode(406);
+            }
+
+            var permArr = new SQLPermission();
 
             string scriptpath = System.IO.Path.GetFullPath(@".\SQLScripts\getLogins.sql");
 
             DataTable dtlogins = SQLUtil.ScriptExecutor(scriptpath, connString);
-
-            var permArr = new SQLPermission();
-            
-            permArr.logins = dtlogins.AsEnumerable().Select(x => x[0].ToString()).ToList();
+             
+            permArr.Logins = dtlogins.AsEnumerable().Select(x => x[0].ToString()).ToList();
 
             scriptpath = System.IO.Path.GetFullPath(@".\SQLScripts\getRoles.sql");
             DataTable dtroles = SQLUtil.ScriptExecutor(scriptpath, connString);
 
-            permArr.roles = dtroles.AsEnumerable().Select(x => x[0].ToString()).ToList();
+            permArr.Roles = dtroles.AsEnumerable().Select(x => x[0].ToString()).ToList();
 
-
-
-            string json = JsonConvert.SerializeObject(permArr, Formatting.Indented);
-
+            string json = SQLUtil.ToJsonCamelCase(permArr);
 
             return StatusCode(200, json);
 
@@ -50,28 +57,37 @@ namespace JitPermissionSQL.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post()
+        public ActionResult Post(SQLPostJIT postJIT)
         {
-            Request.Headers.TryGetValue("X-Conn", out var traceValue);
+            string connString;
 
-            //var connString = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(traceValue));
+            try
+            {
+                Request.Headers.TryGetValue("X-Conn", out var traceValue);
+                connString = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(traceValue));
+            }
+            catch
+            {
+                return StatusCode(406);
+            }
 
-            //string scriptpath = System.IO.Path.GetFullPath(@".\SQLScripts\getLogins.sql");
-            //string jsonLogin = SQLUtil.JsonScriptExecutor(scriptpath, connString);
+             
+
+            List<SqlParameter> sqlparams = new List<SqlParameter>();
+            sqlparams.Add(new SqlParameter("@login_name", postJIT.Login));
+            sqlparams.Add(new SqlParameter("@role_name", postJIT.Role));
+            sqlparams.Add(new SqlParameter("@start" , postJIT.StartDate.ToDateTime() ));
+            sqlparams.Add(new SqlParameter("@finish", postJIT.EndDate.ToDateTime() ));
 
 
-            //scriptpath = System.IO.Path.GetFullPath(@".\SQLScripts\getLogins.sql");
-            //string jsonRole = SQLUtil.JsonScriptExecutor(scriptpath, connString);
+            string scriptpath = System.IO.Path.GetFullPath(@".\SQLScripts\JitRole.sql");
+            DataTable genguid = SQLUtil.ScriptExecutor(scriptpath, connString , sqlparams);
 
-            //JObject jmerge = JObject.Parse(jsonLogin);
-
-            //jmerge.Merge(jsonRole, new JsonMergeSettings { MergeArrayHandling = MergeArrayHandling.Union });
-
-            //string json = jmerge.ToString();
+            string json = SQLUtil.ToJsonCamelCase(genguid);
 
 
 
-            return StatusCode(200, traceValue);
+            return StatusCode(201 , json);
 
         }
 

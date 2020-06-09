@@ -40,15 +40,15 @@ export class SqlConnComponent implements OnInit {
       .subscribe((token) =>
       {
         this.tok = token;
-        sessionStorage.setItem('conn', this.tok.sqltoken);
-        //console.log(sessionStorage.getItem('conn'));
+        sessionStorage.setItem('conn', this.tok.sqlToken);
+        console.log(sessionStorage.getItem('conn'));
+        this.router.navigate(['/sql-serverperm'])
       } ,
        error => console.error(error)
       );
 
 
-    this.router.navigate(['/sql-serverperm']);
-    
+  
   }
 
 

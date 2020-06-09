@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Text.Json;
 using System.Runtime.InteropServices;
 using System.Data;
+using Newtonsoft.Json.Serialization;
 
 namespace SQLJITApi
 {
@@ -57,5 +58,27 @@ namespace SQLJITApi
 
         }
         
+
+
+
+        public static string ToJsonCamelCase(object toserialize) 
+        {
+            DefaultContractResolver contractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new CamelCaseNamingStrategy
+                {
+                    ProcessDictionaryKeys = false
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(toserialize, new JsonSerializerSettings
+            {
+                ContractResolver = contractResolver,
+                Formatting = Formatting.Indented
+            });
+            return json;
+        }
+         
+
     }
 }
