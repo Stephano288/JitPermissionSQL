@@ -79,9 +79,18 @@ namespace JitPermissionSQL.Controllers
             sqlparams.Add(new SqlParameter("@start" , postJIT.StartDate.ToDateTime() ));
             sqlparams.Add(new SqlParameter("@finish", postJIT.EndDate.ToDateTime() ));
 
+            DataTable genguid = new DataTable();
+            try
+            {
+                string scriptpath = System.IO.Path.GetFullPath(@".\SQLScripts\JitRole.sql");
+                genguid = SQLUtil.ScriptExecutor(scriptpath, connString, sqlparams);
+            }
+            catch 
+            {
 
-            string scriptpath = System.IO.Path.GetFullPath(@".\SQLScripts\JitRole.sql");
-            DataTable genguid = SQLUtil.ScriptExecutor(scriptpath, connString , sqlparams);
+                return StatusCode(406);
+
+            }
 
             string json = SQLUtil.ToJsonCamelCase(genguid);
 

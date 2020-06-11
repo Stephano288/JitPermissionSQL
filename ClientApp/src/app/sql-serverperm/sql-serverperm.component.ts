@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ServerPermission, ReceivedPermission } from './sql-serverperm';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder ,FormsModule } from '@angular/forms';
-import {NgbdDatepickerRange} from "./datepick.component"
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+
+
+import { NgbdDatepickerRange } from '../services/datepick.component';
 
 
 
@@ -17,12 +18,10 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 export class SqlServerPermission implements OnInit {
 
-  fdate: Date;
-  tdate: Date;
+
   permform: FormGroup;
   sqlperm: ReceivedPermission;
   role: string;
-  serverPerm = new ServerPermission();
   fetchurl: string = "https://localhost:44359/SQLPermission";
   token = sessionStorage.getItem('conn');
   guid: string[];
@@ -31,7 +30,7 @@ export class SqlServerPermission implements OnInit {
 
 
   headers = new HttpHeaders({ 'X-Conn': this.token });
-  constructor(private http: HttpClient, private fb: FormBuilder) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private datepicker: NgbdDatepickerRange) { }
 
 
 
@@ -49,19 +48,12 @@ export class SqlServerPermission implements OnInit {
     })
   }
 
-  dateselectionto(seldates: any): void {
-    this.tdate = seldates;
-  }
-
-  dateselectionfrom(seldates: any): void {
-    this.fdate = seldates;
-  }
 
   patchData(): void {
     this.permform.patchValue
       ({
-        startDate: this.fdate,
-        endDate: this.tdate,
+        startDate: this.datepicker.fromDate,
+        endDate: this.datepicker.toDate,
       })
     this.doTheMagic();
 

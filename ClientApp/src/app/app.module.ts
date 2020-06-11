@@ -12,7 +12,7 @@ import { SqlConnComponent } from './sql-conn/sql-conn.component';
 import { SqlServerPermission } from './sql-serverperm/sql-serverperm.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdDatepickerRange } from './sql-serverperm/datepick.component';
+import { NgbdDatepickerRange } from './services/datepick.component';
 
 
 
@@ -25,7 +25,7 @@ import { NgbdDatepickerRange } from './sql-serverperm/datepick.component';
     SqlConnComponent,
     SqlServerPermission,
     NgbdDatepickerRange
-  ],
+   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -40,7 +40,7 @@ import { NgbdDatepickerRange } from './sql-serverperm/datepick.component';
     ]) ,
         
   ],
-  providers: [],
+  providers: [NgbdDatepickerRange  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,7 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output, Injectable} from '@angular/core';
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+
+@Injectable()
 
 @Component({
   selector: 'ngbd-datepicker-range',
@@ -25,16 +27,15 @@ import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
   `]
 })
 export class NgbdDatepickerRange {
-  @Output() fromdateselected= new EventEmitter<any>();
-  @Output() todateselected= new EventEmitter<any>();
+
   hoveredDate: NgbDate | null = null;
 
   fromDate: NgbDate;
   toDate: NgbDate | null = null;
   
   constructor(calendar: NgbCalendar) {
-    // this.fromDate = calendar.getToday();
-    // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
 
   onDateSelection(date: NgbDate){
@@ -46,8 +47,7 @@ export class NgbdDatepickerRange {
       this.toDate = null;
       this.fromDate = date;
     }
-    this.fromdateselected.emit(this.fromDate);
-    this.todateselected.emit(this.toDate);
+
 
     }
 
