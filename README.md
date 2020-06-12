@@ -3,7 +3,7 @@ Just In Time Permission for SQL Server
 
 Disclaimer: 
 This simple application is my way to learn more about Angular and Asp.net Core.
-I'm not a developer, so don''t expct awsome code.
+I'm not a developer, so don't expect awsome code.
 
 The project is useful to achive a common DBA task: provide permission and even more important remeber remove the very same permission.
 
