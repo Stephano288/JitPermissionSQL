@@ -4,6 +4,7 @@ import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import {Routes, Router} from '@angular/router'
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {WheelComponent} from '../services/wheel.component'
 
 @Component({
 
@@ -42,16 +43,13 @@ export class SqlConnComponent implements OnInit {
         this.tok = token;
         sessionStorage.setItem('conn', this.tok.sqlToken);
         console.log(sessionStorage.getItem('conn'));
+        this.router.navigate(['/sql-serverperm']);
+
         
       } ,
        error => console.error(error)
     );
 
-
-    this.router.navigate(['/sql-serverperm'])
-
-
-  
        }
 
 

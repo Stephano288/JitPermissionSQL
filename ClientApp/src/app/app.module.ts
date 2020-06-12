@@ -11,6 +11,11 @@ import { SqlServerPermission } from './sql-serverperm/sql-serverperm.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdDatepickerRange } from './services/datepick.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { WheelHttpInterceptor } from './services/wheel.interceptor';
+import {  WheelService } from './services/wheel.service';
+import { WheelComponent } from './services/wheel.component';
+ 
  
 
 
@@ -21,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavMenuComponent,
     HomeComponent,
     SqlConnComponent,
+    WheelComponent,
     SqlServerPermission,
     NgbdDatepickerRange
    ],
@@ -29,6 +35,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     NgbModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -37,7 +45,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ]) ,
         
   ],
-  providers: [NgbdDatepickerRange],
+  providers: [
+    NgbdDatepickerRange,
+    WheelService,
+    { provide: HTTP_INTERCEPTORS, useClass: WheelHttpInterceptor, multi: true }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

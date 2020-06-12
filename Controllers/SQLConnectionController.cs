@@ -21,7 +21,8 @@ namespace JitPermissionSQL.Controllers
             public ActionResult Post(CustomSQLConnectionString connstring )
             {
 
-                using (SqlConnection conn = new SqlConnection(connstring.ConnectionString))
+            
+            using (SqlConnection conn = new SqlConnection(connstring.ConnectionString))
             {
                 conn.Open();
 
@@ -33,7 +34,7 @@ namespace JitPermissionSQL.Controllers
             return StatusCode(201 , json);
             
         }
-        
 
+      
     }
 }

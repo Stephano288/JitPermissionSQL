@@ -28,7 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\services\wheelinterceptor.component.ts" />
+    <None Remove="ClientApp\src\app\services\wheel.component.ts" />
+    <None Remove="ClientApp\src\app\services\wheel.interceptor.ts" />
+    <None Remove="ClientApp\src\app\services\wheel.service.ts" />
     <None Remove="ClientApp\src\app\sql-conn\sql-conn.component.ts" />
     <None Remove="ClientApp\src\app\sql-conn\sql-conn.ts" />
     <None Remove="ClientApp\src\app\sql-serverperm\sql-serverperm.component.ts" />
@@ -40,7 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\services\wheelinterceptor.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\wheel.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\wheel.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\wheel.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\sql-conn\sql-conn.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\sql-conn\sql-conn.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\sql-serverperm\sql-serverperm.component.ts" />
