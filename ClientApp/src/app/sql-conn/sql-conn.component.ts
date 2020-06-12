@@ -3,8 +3,7 @@ import { ConnectionString, SQLToken } from './sql-conn';
 import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import {Routes, Router} from '@angular/router'
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import {WheelComponent} from '../services/wheel.component'
+
 
 @Component({
 

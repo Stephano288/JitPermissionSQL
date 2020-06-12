@@ -29,7 +29,11 @@ namespace JitPermissionSQL.Controllers
             }
 
             ConnToken connToken = new ConnToken();
-            connToken.SqlToken = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(connstring.ConnectionString)); ;
+
+            var crypto = new CryptoHelper(Global.Crypto.Key, Global.Crypto.IVector);
+
+
+            connToken.SqlToken = crypto.Encrypt(connstring.ConnectionString);
             string json = SQLUtil.ToJsonCamelCase(connToken);
             return StatusCode(201 , json);
             

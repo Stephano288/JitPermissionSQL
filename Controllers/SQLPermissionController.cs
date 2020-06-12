@@ -27,7 +27,10 @@ namespace JitPermissionSQL.Controllers
             try 
             { 
                 Request.Headers.TryGetValue("X-Conn", out var traceValue);
-                connString = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(traceValue));
+
+                var crypto = new CryptoHelper(Global.Crypto.Key, Global.Crypto.IVector);
+
+                connString = crypto.Decrypt(traceValue);
             }
             catch
             {
@@ -64,7 +67,8 @@ namespace JitPermissionSQL.Controllers
             try
             {
                 Request.Headers.TryGetValue("X-Conn", out var traceValue);
-                connString = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(traceValue));
+                var crypto = new CryptoHelper(Global.Crypto.Key, Global.Crypto.IVector);
+                connString = crypto.Decrypt(traceValue);
             }
             catch
             {

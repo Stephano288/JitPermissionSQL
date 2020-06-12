@@ -70,5 +70,4 @@ export class SqlServerPermission implements OnInit {
         error => console.error(error)
             )
       }
-
 }

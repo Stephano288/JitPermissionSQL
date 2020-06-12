@@ -1,80 +1,82 @@
+<app-loader></app-loader>
+
 <div class="card-header">
   SQL Server Just in Time Permission
 </div>
 Select one role and one login to give temporary permission
-<p></p> 
+<p></p>
 <br>
 <br>
 
 <form novalidate
-(ngSubmit)="patchData()"
-[formGroup]="permform">
-<div class="form-group">
+      (ngSubmit)="patchData()"
+      [formGroup]="permform">
+  <div class="form-group">
 
-  <div class="col-xs-6">
-   <h2 class="sub-header">Logins</h2>
-  <div class='table-responsive'>
-    <table class='table table-striped w-auto'>
-      <thead>
-        <tr >
-          <th>Select</th>
-          <th>Login</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let login of sqlperm?.logins">
-          <td>
-            <input type="radio" name="login" value= {{login}}  formControlName="login">
-          </td>
-          {{login}}
-          <td>
-          </td>  
-      </tr>
-      </tbody>
-  </table>
-  </div>
+    <div class="col-xs-6">
+      <h2 class="sub-header">Logins</h2>
+      <div class='table-responsive'>
+        <table class='table table-striped w-auto'>
+          <thead>
+            <tr>
+              <th>Select</th>
+              <th>Login</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let login of sqlperm?.logins">
+              <td>
+                <input type="radio" name="login" value={{login}} formControlName="login">
+              </td>
+              {{login}}
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+      <h2 class="sub-header">Roles</h2>
+      <div class='table-responsive'>
+        <table class='table table-striped w-auto'>
+          <thead>
+            <tr>
+              <th>Select</th>
+              <th>RoleName</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let role of sqlperm?.roles">
+              <td>
+                <input type="radio" name="role" value={{role}} formControlName="role">
+              </td>
+              {{role}}
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
-  <div class="col-xs-6">
-  <h2 class="sub-header">Roles</h2>
-  <div class='table-responsive'>
-    <table class='table table-striped w-auto'>
-      <thead>
-        <tr >
-          <th>Select</th>
-          <th>RoleName</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let role of sqlperm?.roles">
-          <td>
-            <input type="radio" name="role" value= {{role}}  formControlName="role">
-          </td>
-          {{role}}
-          <td>
-          </td>  
-      </tr>
-      </tbody>
-  </table>
-  </div>
-</div>
-</div>
-  
 
-  <ngbd-datepicker-range ></ngbd-datepicker-range>
+  <ngbd-datepicker-range></ngbd-datepicker-range>
   <button class="btn btn-outline-secondary"
-                  type="submit">
-            Do the Magic!
-    </button>
+          type="submit">
+    Do the Magic!
+  </button>
 
 
 
 
 </form>
 
- 
+
 <!--<br>Dirty: {{ permform.dirty }}
 <br>Touched: {{ permform.touched }}
 <br>Value: {{ permform.value | json }}
 
-<p></p>--> 
+<p></p>-->
