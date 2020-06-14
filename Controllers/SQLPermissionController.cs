@@ -28,9 +28,7 @@ namespace JitPermissionSQL.Controllers
             { 
                 Request.Headers.TryGetValue("X-Conn", out var traceValue);
 
-                var crypto = new CryptoHelper(Global.Crypto.Key, Global.Crypto.IVector);
-
-                connString = crypto.Decrypt(traceValue);
+                connString = Global.Crypto.Decrypt(traceValue);
             }
             catch
             {
@@ -67,8 +65,7 @@ namespace JitPermissionSQL.Controllers
             try
             {
                 Request.Headers.TryGetValue("X-Conn", out var traceValue);
-                var crypto = new CryptoHelper(Global.Crypto.Key, Global.Crypto.IVector);
-                connString = crypto.Decrypt(traceValue);
+                connString = Global.Crypto.Decrypt(traceValue);
             }
             catch
             {
