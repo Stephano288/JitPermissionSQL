@@ -75,6 +75,28 @@ Select one role and one login to give temporary permission
 </form>
 
 
+<!-- Modal -->
+<div class="modal" id="Modal" [style.display]="showModal ? 'block' : 'none'">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">JIT Permission Created</h4>
+        <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+       All Done!
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" (click)="hide()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 <!--<br>Dirty: {{ permform.dirty }}
 <br>Touched: {{ permform.touched }}
 <br>Value: {{ permform.value | json }}

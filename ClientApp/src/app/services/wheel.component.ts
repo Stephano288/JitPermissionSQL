@@ -7,8 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-loader',
-  templateUrl: './wheel.component.html',
-  styleUrls: ['./wheel.component.css']
+  templateUrl: './wheel.component.html'
  
 })
 export class WheelComponent {

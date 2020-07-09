@@ -18,7 +18,7 @@ import { NgbdDatepickerRange } from '../services/datepick.component';
 
 export class SqlServerPermission implements OnInit {
 
-
+  showModal: boolean;
   permform: FormGroup;
   sqlperm: ReceivedPermission;
   role: string;
@@ -66,8 +66,14 @@ export class SqlServerPermission implements OnInit {
     this.http.post<string[]>(this.fetchurl, this.permform.value, { headers: this.headers })
       .subscribe((result) => {
         this.guid = result;
+        this.showModal = true
                           },
         error => console.error(error)
             )
-      }
+  }
+
+
+  hide() {
+    this.showModal = false;
+  }
 }

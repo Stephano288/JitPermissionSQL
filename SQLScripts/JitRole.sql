@@ -9,8 +9,8 @@
 
 
 
-DECLARE @JobName1 NVARCHAR(36)  = NEWID()
-DECLARE @JobName2 NVARCHAR(36)  = NEWID()
+DECLARE @JobName1 NVARCHAR(41)  = NEWID()
+DECLARE @JobName2 NVARCHAR(41)  
 DECLARE @SchedName1 NVARCHAR(40)
 DECLARE @SchedName2 NVARCHAR(40)
 DECLARE @JobId BINARY(16)
@@ -22,12 +22,14 @@ DECLARE @FinishDate NVARCHAR(8)
 DECLARE @FinishTime NVARCHAR(6)
 
 
-set @SchedName1=@JobName2+'_JIT'
-set @SchedName2=@JobName2+'_JIT'
-set @StartDate=convert(NVARCHAR(8),@start,112)
-set	@StartTime='000000'
-set @FinishDate=convert(NVARCHAR(8),@finish,112)
-set	@FinishTime='000000'
+SET @JobName1=@JobName1+'_GJIT'
+SET @JobName2=@JobName1+'_RJIT'
+SET @SchedName1=@JobName2+'_JIT'
+SET @SchedName2=@JobName2+'_JIT'
+SET @StartDate=convert(NVARCHAR(8),@start,112)
+SET @StartTime='000000'
+SET @FinishDate=convert(NVARCHAR(8),@finish,112)
+SET @FinishTime='000000'
 
 --controls
 IF NOT EXISTS (select 1 from sys.server_principals where name=@login_name)
