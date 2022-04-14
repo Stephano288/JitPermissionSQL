@@ -9,7 +9,7 @@ Select one role and one login to give temporary permission
 <br>
 
 <form novalidate
-      (ngSubmit)="patchData()"
+      (ngSubmit)="doTheMagic()"
       [formGroup]="permform">
   <div class="form-group">
 
@@ -62,14 +62,26 @@ Select one role and one login to give temporary permission
     </div>
   </div>
 
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="startDate">Start</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="date" value="startDate" formControlName="startDate" />
+    </div>
+  </div>
 
-  <ngbd-datepicker-range></ngbd-datepicker-range>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="endDate">End</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="date" value="endDate" formControlName="endDate" />
+    </div>
+  </div>
+
+ 
+
   <button class="btn btn-outline-secondary"
           type="submit">
     Do the Magic!
   </button>
-
-
 
 
 </form>
@@ -97,8 +109,8 @@ Select one role and one login to give temporary permission
 </div>
 
 
-<!--<br>Dirty: {{ permform.dirty }}
+<br>Dirty: {{ permform.dirty }}
 <br>Touched: {{ permform.touched }}
 <br>Value: {{ permform.value | json }}
 
-<p></p>-->
+<p></p>

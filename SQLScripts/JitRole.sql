@@ -1,10 +1,10 @@
 ﻿
 
 
---DECLARE @login_name NVARCHAR(150) ='login'
+--DECLARE @login_name NVARCHAR(150) ='pippo'
 --DECLARE @role_name NVARCHAR(150) ='sysadmin'
---DECLARE @start datetime = '2020-06-22'
---DECLARE @finish datetime = '2020-06-23'
+--DECLARE @start datetime = '2022-06-22'
+--DECLARE @finish datetime = '2022-06-23'
 
 
 
@@ -22,10 +22,11 @@ DECLARE @FinishDate NVARCHAR(8)
 DECLARE @FinishTime NVARCHAR(6)
 
 
-SET @JobName1=@JobName1+'_GJIT'
+
 SET @JobName2=@JobName1+'_RJIT'
-SET @SchedName1=@JobName2+'_JIT'
-SET @SchedName2=@JobName2+'_JIT'
+SET @JobName1=@JobName1+'_GJIT'
+SET @SchedName1=@JobName1
+SET @SchedName2=@JobName2
 SET @StartDate=convert(NVARCHAR(8),@start,112)
 SET @StartTime='000000'
 SET @FinishDate=convert(NVARCHAR(8),@finish,112)
@@ -108,10 +109,7 @@ EXEC msdb.dbo.sp_add_jobschedule @job_name=@JobName1, @name=@SchedName1,
 
 
 
-
-
-
-
+ 
 
  --REMOVE PERMISSION JOB
  EXEC  msdb.dbo.sp_add_job @job_name=@JobName2, 

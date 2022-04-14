@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable, Inject } from '@angular/core';
 import { ServerPermission, ReceivedPermission } from './sql-serverperm';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder ,FormsModule } from '@angular/forms';
@@ -22,7 +22,7 @@ export class SqlServerPermission implements OnInit {
   permform: FormGroup;
   sqlperm: ReceivedPermission;
   role: string;
-  fetchurl: string = "https://localhost:44359/SQLPermission";
+  fetchurl: string = this.baseUrl + 'api/SQLPermission';
   token = sessionStorage.getItem('conn');
   guid: string[];
 
@@ -30,10 +30,9 @@ export class SqlServerPermission implements OnInit {
 
 
   headers = new HttpHeaders({ 'X-Conn': this.token });
-  constructor(private http: HttpClient, private fb: FormBuilder, private datepicker: NgbdDatepickerRange) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private datepicker: NgbdDatepickerRange, @Inject('BASE_URL') private baseUrl: string) { }
 
-
-
+ 
   ngOnInit() {
     this.http.get<ReceivedPermission>(this.fetchurl, { headers: this.headers }).subscribe(result => {
       this.sqlperm = result;
@@ -49,15 +48,7 @@ export class SqlServerPermission implements OnInit {
   }
 
 
-  patchData(): void {
-    this.permform.patchValue
-      ({
-        startDate: this.datepicker.fromDate,
-        endDate: this.datepicker.toDate,
-      })
-    this.doTheMagic();
-
-  }
+  
 
 
 
@@ -66,10 +57,12 @@ export class SqlServerPermission implements OnInit {
     this.http.post<string[]>(this.fetchurl, this.permform.value, { headers: this.headers })
       .subscribe((result) => {
         this.guid = result;
-        this.showModal = true
+        this.showModal = true;
+        this.permform.reset();
                           },
         error => console.error(error)
-            )
+    )
+    
   }
 
 

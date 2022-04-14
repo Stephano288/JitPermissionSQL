@@ -15,7 +15,7 @@ namespace JitPermissionSQL.Controllers
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class SQLPermissionController : Controller
     {
         [HttpGet]
@@ -77,8 +77,8 @@ namespace JitPermissionSQL.Controllers
             List<SqlParameter> sqlparams = new List<SqlParameter>();
             sqlparams.Add(new SqlParameter("@login_name", postJIT.Login));
             sqlparams.Add(new SqlParameter("@role_name", postJIT.Role));
-            sqlparams.Add(new SqlParameter("@start" , postJIT.StartDate.ToDateTime() ));
-            sqlparams.Add(new SqlParameter("@finish", postJIT.EndDate.ToDateTime() ));
+            sqlparams.Add(new SqlParameter("@start" , postJIT.StartDate ));
+            sqlparams.Add(new SqlParameter("@finish", postJIT.EndDate ));
 
             DataTable genguid = new DataTable();
             try

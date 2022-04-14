@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Injectable,  Inject } from '@angular/core';
 import { ConnectionString, SQLToken } from './sql-conn';
 import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import {Routes, Router} from '@angular/router'
@@ -24,7 +24,8 @@ export class SqlConnComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string
    ) { }
 
   ngOnInit() {
@@ -36,7 +37,7 @@ export class SqlConnComponent implements OnInit {
   }
 
   sqlConnect(): void {
-    this.http.post<SQLToken>("https://localhost:44359/SQLConnection", this.connectionForm.value)
+    this.http.post<SQLToken>(this.baseUrl + 'api/SQLConnection', this.connectionForm.value)
       .subscribe((token) =>
       {
         this.tok = token;

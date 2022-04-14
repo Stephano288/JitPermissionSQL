@@ -22,27 +22,12 @@ namespace SQLJITApi.Classes
         public string Login { get; set; }
         public string Role { get; set; }
 
-        public JITDateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public JITDateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
     }
-
-    public class JITDateTime
-    {
-        public int Year { get; set; }
-        public int Month { get; set; }
-        public int Day { get; set; }
-
-        public DateTime ToDateTime()
-        {
-            DateTime _date = new DateTime(Year ,  Month ,  Day);
-            return _date;
-        }
-    }
-
-
-
+   
 }
 
 
