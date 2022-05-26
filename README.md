@@ -20,5 +20,7 @@ You are sending a credential and you want to encrypt the communication channel.
 
 Said that: in header request, after the first connection, it's always included the complete connection string. 
 I don't like to have the password in clear text on the client after the authentication. 
-The connection string is encrypted /decrypted server side with a randome key, even if the channel is protected . 
-This raise a problem: the server is not completly restful and scalability is not possible. Due to the nature of the application I think this is acceptable.
+The connection string is encrypted /decrypted server side with a randome key, even if the channel is protected.
+The implementation of the key is far from a good way to do encryption, again is just to avoid a clear text password. 
+Another problem is that the server is not completly restful and scalability is not possible. Due to the nature of the application I think this is acceptable.
+In a future version of the tool I will add the option to not encrypt and implement encryption in a secure way.
